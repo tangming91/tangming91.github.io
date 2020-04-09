@@ -6,41 +6,222 @@
     <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
 </head>
 <body>
-
-
+<div class="tabs" v-cloak="">
+  <div class="tab-2">
+    <label for="tab2-1">一</label>
+    <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
     <div id="app">
-        <div>
+      <h4>第一个标签页</h4>
+      <!--差值表达式-->
             {{hello}}
-        </div>
-
+            <!--v-textz可以直接渲染标签的内容-->
+            <p v-text="hello"></p>
+            <!--v-html  -->
+            <p v-html="htmlText"></p>
+            <p>{{htmlText}}</p>
+            <!--v-bind 对标签属性进行绑定  简写： -->
+            <!--v-on 对标签绑定事件  简写@ -->
+            <input type="button" id="btn" v-bind:value="buttonText" v-on:click="clickme"/>
+            <input type="button" id="btn" :value="buttonText2" @click="clickme2"/>
     </div>
-
-
-
+  </div>
+  <div class="tab-2">
+    <label for="tab2-2">二</label>
+    <input id="tab2-2" name="tabs-two" type="radio">
+    <div id="app2">
+      <h4>第二个标签页</h4>
+      <p>{{score}}</p>
+      <p>{{level}}</p>
+      <input type="button" name="" id="" value="开始抽奖" @click="start"/>
+      <input type="button" name="" id="" value="停止抽奖" @click="stop"/>
+      
+    </div>
+  </div>
+  
+    <div class="tab-2">
+    <label for="tab2-3">三</label>
+    <input id="tab2-3" name="tabs-two" type="radio">
+    <div id="app3">
+      <h4>第三个标签页</h4>
+      <p></p>
+      <!--v-model 双向绑定,只能绑定value属性-->
+      <input type="text" v-model="score"/>
+      <input type="range" v-model="score" min="0" :max="maxValue"/><br />
+      <select v-model="maxValue">
+      	<option value="100">100</option>
+      	<option value="1000">1000</option>
+      	<option value="10000">10000</option>
+      </select>
+    </div>
+  </div>
+  
+</div>
 
     <script type="text/javascript">
         var vm = new Vue({
             el: "#app",
             data: {
-                hello: "Hello World!!"
+                hello: "Hello World!!",
+                htmlText:"<b>加粗</b>",
+                buttonText:"点击1",
+                buttonText2:"点击2"
+            },
+            methods:{
+            	clickme(){
+            		this.buttonText="已点击1";
+            	},
+            	clickme2(){
+            		this.buttonText2="已点击2";
+            	}
             }
+            
         });
+        
+        var vm2=new Vue({
+        	el:"#app2",
+        	data:{
+        		score:0,
+        		level:null,
+        		intervalIndex:null
+        	},
+        	methods:{
+        		start(){
+        			if(this.intervalIndex==null){
+        				this.intervalIndex=setInterval(()=>{
+        				this.score=parseInt(Math.random()*100);
+        				switch(true){
+        					case this.score<30:
+        					this.level="参与奖";
+        					break;
+        					case this.score>=30&&this.score<65:
+        					this.level="三等奖";
+        					break;
+        					case this.score>=65&&this.score<=85:
+        					this.level="二等奖";
+        					break;
+        					case this.score>=85:
+        					this.level="一等奖";
+        					break;
+	        				}
+	        			},50);
+        			}
+        			
+        			
+        		},
+        		stop(){
+        			clearInterval(this.intervalIndex);
+        			this.intervalIndex=null;
+        		}
+        	}
+        	
+        });
+        
+        var vm3=new Vue({
+        	el:"#app3",
+        	data:{
+        		score:50,
+        		maxValue:100
+        	},
+        	methods:{
+        		
+        	}
+        	
+        });
+        
+        
+        
     </script>
+    <style>
+    	[v-cloak]{
+			display: none;
+		}
+		.tabs {
+		  display: block;
+		  display: -webkit-flex;
+		  display: -moz-flex;
+		  display: flex;
+		  -webkit-flex-wrap: wrap;
+		  -moz-flex-wrap: wrap;
+		  flex-wrap: wrap;
+		  margin: 0;
+		  overflow: hidden; }
+		.tabs [class^="tab"] label,
+		.tabs [class*=" tab"] label {
+			width: 30%;
+		    cursor: pointer;
+		    display: block;
+		    font-size: 1.1em;
+		    font-weight: 300;
+		    line-height: 1em;
+		    padding: 2rem 0;
+		    text-align: center; }
+		  .tabs [class^="tab"] [type="radio"],
+		  .tabs [class*=" tab"] [type="radio"] {
+		    cursor: pointer;
+		    -webkit-appearance: none;
+		    -moz-appearance: none;
+		    appearance: none;
+		    display: block;
+		    width: 30%;
+		    -webkit-transition: all 0.3s ease-in-out;
+		    -moz-transition: all 0.3s ease-in-out;
+		    -o-transition: all 0.3s ease-in-out;
+		    transition: all 0.3s ease-in-out; }
+		    .tabs [class^="tab"] [type="radio"]:hover, .tabs [class^="tab"] [type="radio"]:focus,
+		    .tabs [class*=" tab"] [type="radio"]:hover,
+		    .tabs [class*=" tab"] [type="radio"]:focus {
+		/*    tab标签选中的颜色标志      */
+		      border-bottom: 1px solid #40a9ff;
+		}
+		    .tabs [class^="tab"] [type="radio"]:checked,
+		    .tabs [class*=" tab"] [type="radio"]:checked {
+		      border-bottom: 2px solid #40a9ff; 
+		}
+		    .tabs [class^="tab"] [type="radio"]:checked + div,
+		    .tabs [class*=" tab"] [type="radio"]:checked + div {
+		      opacity: 1; }
+		    .tabs [class^="tab"] [type="radio"] + div,
+		    .tabs [class*=" tab"] [type="radio"] + div {
+		      display: block;
+		      opacity: 0;
+		      padding: 2rem 0;
+		      width: 90%;
+		      -webkit-transition: all 0.3s ease-in-out;
+		      -moz-transition: all 0.3s ease-in-out;
+		      -o-transition: all 0.3s ease-in-out;
+		      transition: all 0.3s ease-in-out; }
+		  .tabs .tab-2 {
+		    width: 30%; }
+		    .tabs .tab-2 [type="radio"] + div {
+		      width: 200%;
+		      margin-left: 200%; }
+		    .tabs .tab-2 [type="radio"]:checked + div {
+		      margin-left: 0; }
+		    .tabs .tab-2:last-child [type="radio"] + div {
+		      margin-left: 100%; }
+		    .tabs .tab-2:last-child [type="radio"]:checked + div {
+		      margin-left: -100%; }
+    </style>
+     
     
-	<style>
-        color{
-            background-image: linear-gradient(135deg, deeppink, dodgerblue);
-            font-size: 20px;
-            font-weight: bold;
-            -webkit-background-clip: text;
-            -moz-background-clip: text;
-            background-clip: text;
-            box-decoration-break: clone;
-            -webkit-box-decoration-break: clone;
-            -moz-box-decoration-break: clone;
-            color: transparent;
-        }
-	</style>
- 	<color>新春快乐 大吉大利<br>勤洗手 戴口罩<br>没事别瞎跑 狗命要紧</color>
+    
+    <footer>
+    	<style>
+	        color{
+	            background-image: linear-gradient(135deg, deeppink, dodgerblue);
+	            font-size: 20px;
+	            font-weight: bold;
+	            -webkit-background-clip: text;
+	            -moz-background-clip: text;
+	            background-clip: text;
+	            box-decoration-break: clone;
+	            -webkit-box-decoration-break: clone;
+	            -moz-box-decoration-break: clone;
+	            color: transparent;
+	        }
+		</style>
+	 	<color>新春快乐 大吉大利 <br>勤洗手 戴口罩<br>没事别瞎跑 狗命要紧</color>
+	</footer>
+	
 </body>
 </html>
