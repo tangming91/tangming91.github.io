@@ -42,8 +42,11 @@
     <label for="tab2-3">三</label>
     <input id="tab2-3" name="tabs-two" type="radio">
     <div id="app3">
-      <h4>第三个标签页</h4>
-      <p></p>
+    	<!--:class 绑定样式 1.绑定数组 2.三元表达式 3.数组嵌套-->
+    	<!--:style 1.键值对写法2.键值对对象符合json格式-->
+      <h4 :class="['backg','fontcolor']">第三个标签页</h4>
+      <p :style="[style1,style2]">{{msg}}</p>
+      <input type="button" name="" id="" :value="buts" @click="change"/><br />
       <!--v-model 双向绑定,只能绑定value属性-->
       <input type="text" v-model="score"/>
       <input type="range" v-model="score" min="0" :max="maxValue"/><br />
@@ -52,6 +55,49 @@
       	<option value="1000">1000</option>
       	<option value="10000">10000</option>
       </select>
+      
+      <!--v-for 以可循环四种对象1.普通数组 2.对象数组 3.对象 4.迭代数组，      	
+      	默认以索引绑定，需要使用key属性改变默认选中-->
+      <div>
+      	<ul>
+      		<li v-for="userid in userids">{{userid}}</li>
+      	</ul>
+      	<ul>
+      		<li v-for="user,i in userlist">id:{{user.id}};Name:{{user.name}};索引：{{i}}</li>
+      	</ul>
+      	<select name="">
+      		<option v-for="user,i in userlist" :key="user.id">{{user.name}}</option>
+      	</select>
+      	<input type="button" name="" id="" :value="addval" @click="AddUser"/>
+      	<ul>
+      		<li v-for="item in 10">{{item}}</li>
+      	</ul>
+      	<ul>
+      		<li v-for="value,key,i in userinfo">值：{{value}} ; 键：{{key}} ; 索引：{{i}}</li>
+      	</ul>      	
+      </div>
+      <div>
+      	<!--v-if  v-show  都是显示隐藏，v-show只是将元素加隐藏样式          -->
+      	<p v-if="isif">v-if</p>
+      	<p v-show="isshow">v-show</p>
+      </div>
+      <div>
+      	<table border="" cellspacing="" cellpadding="">
+      		<tr>
+      			<th>编号</th>
+      			<th>姓名</th>
+      			<th>操作</th>
+      		</tr>
+      		<tr v-for="user,i in userlist" :class="{'oddstyle':isodd(i)}">
+      			<td>{{user.id}}</td>
+      			<td v-text="user.name"></td>
+      			<td @click="remove(i)">删除</td>
+      		</tr>
+      	</table>
+		<input type="text" name="" id="" v-model="id" />
+		<input type="text" name="" id="" value="" v-model="username"/>
+		<input type="button" name="" id="" :value="addval" @click="addtableuser"/>
+      </div>
     </div>
   </div>
   
@@ -120,10 +166,47 @@
         	el:"#app3",
         	data:{
         		score:50,
-        		maxValue:100
+        		maxValue:100,
+        		msg:"Hello World!!",
+        		style1:{'background-color':'brown',color:'white'},
+        		style2:{'font-size':'18px'},
+        		buts:"点击改变",
+        		userids:[1,2,3],
+        		userlist:[
+        			{id:1,name:"张三"},
+        			{id:2,name:"李四"},
+        			{id:3,name:"王五"}
+        		],
+        		userinfo:{id:4,name:"赵六"},
+        		addval:"Add",
+        		isif:true,
+        		isshow:true,
+        		id:4,
+        		username:""
         	},
         	methods:{
-        		
+        		change(){
+        			this.style2['font-size']='22px';
+        		},
+        		AddUser(){
+        			this.userlist.unshift({id:4,name:"田七"});
+        		},
+        		isodd(i){
+        			var res=i%2;
+        			if(res==1){
+        				return true;
+        			}else{
+        				return false;
+        			}
+        		},
+        		addtableuser(){
+        			this.userlist.push({id:this.id++,name:this.username});
+        		},
+        		remove(i){
+        			this.userlist.splice(i,1);
+        			//delete this.userlist[i];--无刷新
+        			
+        		}
         	}
         	
         });
@@ -131,6 +214,31 @@
         
         
     </script>
+    <style type="text/css">
+      		table{
+      			width: 600px;
+      			border-collapse: collapse;
+      		}
+      		table td{
+      			border: 1px solid #FF0000;
+      		}
+      		.oddstyle{
+      			background-color: rgb(255,168,168);
+      		}
+      	</style>
+    <style>
+    	.backg{
+    		background-color: aquamarine;
+    	}
+    	.fontcolor{
+    		color:red;
+    	}
+    	.fontcolor1{
+    		color: deepskyblue;
+    	}
+    </style>
+    
+    
     <style>
     	[v-cloak]{
 			display: none;
@@ -203,8 +311,6 @@
 		      margin-left: -100%; }
     </style>
      
-    
-    
     <footer>
     	<style>
 	        color{
