@@ -1,333 +1,2175 @@
-﻿<!DOCTYPE html>
-<html>
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Hello</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html;" />
+    <title>HELLO</title>
+    <link rel="shortcut icon" href="https://www.baidu.com/favicon.ico" />
+    <!--<link href="http://hovertree.com/texiao/html5/index/hovertreewelcome.css" type="text/css" rel="stylesheet" />-->
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
 </head>
 <body>
-<div class="tabs" v-cloak="">
-  <div class="tab-2">
-    <label for="tab2-1">一</label>
-    <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
-    <div id="app">
-      <h4>第一个标签页</h4>
-      <!--差值表达式-->
-            {{hello}}
-            <!--v-textz可以直接渲染标签的内容-->
-            <p v-text="hello"></p>
-            <!--v-html  -->
-            <p v-html="htmlText"></p>
-            <p>{{htmlText}}</p>
-            <!--v-bind 对标签属性进行绑定  简写： -->
-            <!--v-on 对标签绑定事件  简写@ -->
-            <input type="button" id="btn" v-bind:value="buttonText" v-on:click="clickme"/>
-            <input type="button" id="btn" :value="buttonText2" @click="clickme2"/>
+    <!--首页  ondragstart="window.event.returnValue=false" oncontextmenu="window.event.returnValue = true" onselectstart="event.returnValue=false"-->
+    <!--
+    <div id="bootPage">
+
+        <div id="hovertreecontainer">
+
+            <div>
+                <h1 id="h1">何时起 </h1>
+                <h2 id="h2"> 想问候，不知从何问起！</h2>
+
+    <p>&nbsp;</p>
+    <p><strong><a href="" id="goIn">进入</a></strong>&nbsp;&nbsp;<strong></strong></p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
     </div>
-  </div>
-  <div class="tab-2">
-    <label for="tab2-2">二</label>
-    <input id="tab2-2" name="tabs-two" type="radio">
-    <div id="app2">
-      <h4>第二个标签页</h4>
-      <p>{{score}}</p>
-      <p>{{level}}</p>
-      <input type="button" name="" id="" value="开始抽奖" @click="start"/>
-      <input type="button" name="" id="" value="停止抽奖" @click="stop"/>
-      
+
+
     </div>
-  </div>
-  
-    <div class="tab-2">
-    <label for="tab2-3">三</label>
-    <input id="tab2-3" name="tabs-two" type="radio">
-    <div id="app3">
-    	<!--:class 绑定样式 1.绑定数组 2.三元表达式 3.数组嵌套-->
-    	<!--:style 1.键值对写法2.键值对对象符合json格式-->
-      <h4 :class="['backg','fontcolor']">第三个标签页</h4>
-      <p :style="[style1,style2]">{{msg}}</p>
-      <input type="button" name="" id="" :value="buts" @click="change"/><br />
-      <!--v-model 双向绑定,只能绑定value属性-->
-      <input type="text" v-model="score"/>
-      <input type="range" v-model="score" min="0" :max="maxValue"/><br />
-      <select v-model="maxValue">
-      	<option value="100">100</option>
-      	<option value="1000">1000</option>
-      	<option value="10000">10000</option>
-      </select>
-      
-      <!--v-for 以可循环四种对象1.普通数组 2.对象数组 3.对象 4.迭代数组，      	
-      	默认以索引绑定，需要使用key属性改变默认选中-->
-      <div>
-      	<ul>
-      		<li v-for="userid in userids">{{userid}}</li>
-      	</ul>
-      	<ul>
-      		<li v-for="user,i in userlist">id:{{user.id}};Name:{{user.name}};索引：{{i}}</li>
-      	</ul>
-      	<select name="">
-      		<option v-for="user,i in userlist" :key="user.id">{{user.name}}</option>
-      	</select>
-      	<input type="button" name="" id="" :value="addval" @click="AddUser"/>
-      	<ul>
-      		<li v-for="item in 10">{{item}}</li>
-      	</ul>
-      	<ul>
-      		<li v-for="value,key,i in userinfo">值：{{value}} ; 键：{{key}} ; 索引：{{i}}</li>
-      	</ul>      	
-      </div>
-      <div>
-      	<!--v-if  v-show  都是显示隐藏，v-show只是将元素加隐藏样式          -->
-      	<p v-if="isif">v-if</p>
-      	<p v-show="isshow">v-show</p>
-      </div>
-      <div>
-      	<table border="" cellspacing="" cellpadding="">
-      		<tr>
-      			<th>编号</th>
-      			<th>姓名</th>
-      			<th>操作</th>
-      		</tr>
-      		<tr v-for="user,i in userlist" :class="{'oddstyle':isodd(i)}">
-      			<td>{{user.id}}</td>
-      			<td v-text="user.name"></td>
-      			<td @click="remove(i)">删除</td>
-      		</tr>
-      	</table>
-		<input type="text" name="" id="" v-model="id" />
-		<input type="text" name="" id="" value="" v-model="username"/>
-		<input type="button" name="" id="" :value="addval" @click="addtableuser"/>
-      </div>
+
+    <canvas id="canvas"></canvas>
+    <audio autoplay="autoplay">
+        <source src="http://cms.hovertree.com/hovertreesound/hovertreexihuanni.mp3" type="audio/mpeg" />
+
+        您的浏览器不支持播放音乐。请用支持html5的浏览器打开,例如chrome或火狐或者新版IE等。
+        <br />
+    </audio>
+    <script type="text/javascript" src="http://hovertree.com/texiao/html5/index/hovertreewelcome.js">
+    </script>
+    <script type="text/javascript">
+        var timeO;
+        var timeI;
+        var hue;
+        (function (window) {
+
+            var ctx, logo, form, buffer, target = {}, tendrils = [], settings = {};
+
+            settings.debug = true;
+            settings.friction = 0.5;
+            settings.trails = 20;
+            settings.size = 50;
+            settings.dampening = 0.25;
+            settings.tension = 0.98;
+
+            Math.TWO_PI = Math.PI * 2;
+
+            // ========================================================================================
+            // Oscillator 何问起
+            // ----------------------------------------------------------------------------------------
+
+            function Oscillator(options) {
+                this.init(options || {});
+            }
+
+            Oscillator.prototype = (function () {
+
+                var value = 0;
+
+                return {
+
+                    init: function (options) {
+                        this.phase = options.phase || 0;
+                        this.offset = options.offset || 0;
+                        this.frequency = options.frequency || 0.001;
+                        this.amplitude = options.amplitude || 1;
+                    },
+
+                    update: function () {
+                        this.phase += this.frequency;
+                        value = this.offset + Math.sin(this.phase) * this.amplitude;
+                        return value;
+                    },
+
+                    value: function () {
+                        return value;
+                    }
+                };
+
+            })();
+
+            // ========================================================================================
+            // Tendril hovertree.com
+            // ----------------------------------------------------------------------------------------
+
+            function Tendril(options) {
+                this.init(options || {});
+            }
+
+            Tendril.prototype = (function () {
+
+                function Node() {
+                    this.x = 0;
+                    this.y = 0;
+                    this.vy = 0;
+                    this.vx = 0;
+                }
+
+                return {
+
+                    init: function (options) {
+
+                        this.spring = options.spring + (Math.random() * 0.1) - 0.05;
+                        this.friction = settings.friction + (Math.random() * 0.01) - 0.005;
+                        this.nodes = [];
+
+                        for (var i = 0, node; i < settings.size; i++) {
+
+                            node = new Node();
+                            node.x = target.x;
+                            node.y = target.y;
+
+                            this.nodes.push(node);
+                        }
+                    },
+
+                    update: function () {
+
+                        var spring = this.spring,
+                            node = this.nodes[0];
+
+                        node.vx += (target.x - node.x) * spring;
+                        node.vy += (target.y - node.y) * spring;
+
+                        for (var prev, i = 0, n = this.nodes.length; i < n; i++) {
+
+                            node = this.nodes[i];
+
+                            if (i > 0) {
+
+                                prev = this.nodes[i - 1];
+
+                                node.vx += (prev.x - node.x) * spring;
+                                node.vy += (prev.y - node.y) * spring;
+                                node.vx += prev.vx * settings.dampening;
+                                node.vy += prev.vy * settings.dampening;
+                            }
+
+                            node.vx *= this.friction;
+                            node.vy *= this.friction;
+                            node.x += node.vx;
+                            node.y += node.vy;
+
+                            spring *= settings.tension;
+                        }
+                    },
+
+                    draw: function () {
+
+                        var x = this.nodes[0].x,
+                            y = this.nodes[0].y,
+                            a, b;
+
+                        ctx.beginPath();
+                        ctx.moveTo(x, y);
+
+                        for (var i = 1, n = this.nodes.length - 2; i < n; i++) {
+
+                            a = this.nodes[i];
+                            b = this.nodes[i + 1];
+                            x = (a.x + b.x) * 0.5;
+                            y = (a.y + b.y) * 0.5;
+
+                            ctx.quadraticCurveTo(a.x, a.y, x, y);
+                        }
+
+                        a = this.nodes[i];
+                        b = this.nodes[i + 1];
+
+                        ctx.quadraticCurveTo(a.x, a.y, b.x, b.y);
+                        ctx.stroke();
+                        ctx.closePath();
+                    }
+                };
+
+            })();
+
+            // ----------------------------------------------------------------------------------------
+
+            function init(event) {
+
+                document.removeEventListener('mousemove', init);
+                document.removeEventListener('touchstart', init);
+
+                document.addEventListener('mousemove', mousemove);
+                document.addEventListener('touchmove', mousemove);
+                document.addEventListener('touchstart', touchstart);
+
+                mousemove(event);
+                reset();
+                loop();
+            }
+
+            function reset() {
+
+                tendrils = [];
+
+                for (var i = 0; i < settings.trails; i++) {
+
+                    tendrils.push(new Tendril({
+                        spring: 0.45 + 0.025 * (i / settings.trails)
+                    }));
+                }
+            }
+
+            function loop() {
+
+                if (!ctx.running) return;
+
+                ctx.globalCompositeOperation = 'source-over';
+                ctx.fillStyle = 'rgba(8,5,16,0.4)';
+                ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+                ctx.globalCompositeOperation = 'lighter';
+                ctx.strokeStyle = 'hsla(' + Math.round(hue.update()) + ',90%,50%,0.25)';
+                ctx.lineWidth = 1;
+
+                if (ctx.frame % 60 == 0) {
+                    console.log(hue.update(), Math.round(hue.update()), hue.phase, hue.offset, hue.frequency, hue.amplitude);
+                }
+
+                for (var i = 0, tendril; i < settings.trails; i++) {
+                    tendril = tendrils[i];
+                    tendril.update();
+                    tendril.draw();
+                }
+
+                ctx.frame++;
+                ctx.stats.update();
+                requestAnimFrame(loop);
+            }
+
+            function resize() {
+                ctx.canvas.width = window.innerWidth;
+                ctx.canvas.height = window.innerHeight;
+            }
+
+            function start() {
+                if (!ctx.running) {
+                    ctx.running = true;
+                    loop();
+                }
+            }
+
+            function stop() {
+                ctx.running = false;
+            }
+
+            function mousemove(event) {
+                if (event.touches) {
+                    target.x = event.touches[0].pageX;
+                    target.y = event.touches[0].pageY;
+                } else {
+                    target.x = event.clientX
+                    target.y = event.clientY;
+                }
+                event.preventDefault();
+            }
+
+            function touchstart(event) {
+                if (event.touches.length == 1) {
+                    target.x = event.touches[0].pageX;
+                    target.y = event.touches[0].pageY;
+                }
+            }
+
+            function keyup(event) {
+
+                switch (event.keyCode) {
+                    case 32:
+                        save();
+                        break;
+                    default:
+                    // console.log(event.keyCode); hovertree.com
+                }
+            }
+
+            function letters(id) {
+
+                var el = document.getElementById(id),
+                    letters = el.innerHTML.replace('&amp;', '&').split(''),
+                    heading = '';
+
+                for (var i = 0, n = letters.length, letter; i < n; i++) {
+                    letter = letters[i].replace('&', '&amp');
+                    heading += letter.trim() ? '<span class="letter-' + i + '">' + letter + '</span>' : '&nbsp;';
+                }
+
+                el.innerHTML = heading;
+                timeO = setTimeout(function () {
+                    el.className = 'transition-in';
+                }, (Math.random() * 500) + 500);
+            }
+
+            function save() {
+
+                if (!buffer) {
+
+                    buffer = document.createElement('canvas');
+                    buffer.width = screen.availWidth;
+                    buffer.height = screen.availHeight;
+                    buffer.ctx = buffer.getContext('2d');
+
+                    form = document.createElement('form');
+                    form.method = 'post';
+                    form.input = document.createElement('input');
+                    form.input.type = 'hidden';
+                    form.input.name = 'data';
+                    form.appendChild(form.input);
+
+                    document.body.appendChild(form);
+                }
+
+                buffer.ctx.fillStyle = 'rgba(8,5,16)';
+                buffer.ctx.fillRect(0, 0, buffer.width, buffer.height);
+
+                buffer.ctx.drawImage(canvas,
+                    Math.round(buffer.width / 2 - canvas.width / 2),
+                    Math.round(buffer.height / 2 - canvas.height / 2)
+                );
+
+                buffer.ctx.drawImage(logo,
+                    Math.round(buffer.width / 2 - logo.width / 4),
+                    Math.round(buffer.height / 2 - logo.height / 4),
+                    logo.width / 2,
+                    logo.height / 2
+                );
+
+                window.open(buffer.toDataURL(), 'wallpaper', 'top=0,left=0,width=' + buffer.width + ',height=' + buffer.height);
+
+                // form.input.value = buffer.toDataURL().substr(22);
+                // form.submit(); hovertree.com
+            }
+
+            window.requestAnimFrame = (function () {
+                return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function (fn) {
+                    timeI = window.setTimeout(fn, 1000 / 60)
+                };
+            })();
+
+            window.onload = function () {
+
+                ctx = document.getElementById('canvas').getContext('2d');
+                ctx.stats = new Stats();
+                ctx.running = true;
+                ctx.frame = 1;
+
+                logo = new Image();
+                logo.src = 'ht' + 'tp://ho' + 'vertree.c' + 'om/themes/hvtimages/hvtlogo.p' + 'ng';
+
+                hue = new Oscillator({
+                    phase: Math.random() * Math.TWO_PI,
+                    amplitude: 85,
+                    frequency: 0.0015,
+                    offset: 285
+                });
+
+                letters('h1');
+                letters('h2');
+
+                document.addEventListener('mousemove', init);
+                document.addEventListener('touchstart', init);
+                document.body.addEventListener('orientationchange', resize);
+                window.addEventListener('resize', resize);
+                window.addEventListener('keyup', keyup);
+                window.addEventListener('focus', start);
+                window.addEventListener('blur', stop);
+
+                resize();
+
+                if (window.DEBUG) {
+
+                    var gui = new dat.GUI();
+
+                    // gui.add(settings, 'debug');
+                    settings.gui.add(settings, 'trails', 1, 30).onChange(reset);
+                    settings.gui.add(settings, 'size', 25, 75).onFinishChange(reset);
+                    settings.gui.add(settings, 'friction', 0.45, 0.55).onFinishChange(reset);
+                    settings.gui.add(settings, 'dampening', 0.01, 0.4).onFinishChange(reset);
+                    settings.gui.add(settings, 'tension', 0.95, 0.999).onFinishChange(reset);
+
+                    document.body.appendChild(ctx.stats.domElement);
+                }
+            };
+
+        })(window);
+
+    </script>
+
+
     </div>
-  </div>
-  
-</div>
+    -->
+    <!--导航-->
+    <div id="daohang" class="">
+        <div class="container" id="container">
+            <aside class="left-bar" id="leftBar">
+                <div class="title">
+                    <p>第一站导航</p>
+                </div>
+                <nav class="nav">
+                    <div class="item active"><a href=""><i class="iconfont icon-daohang2"></i>导航</a><i class="line"></i></div>
+                    <ul class="nav-item" id="navItem">
+                        <li><a href="#bbs" class="active"><i class="iconfont icon-shequ"></i>开发社区</a></li>
+                        <li><a href="#sill"><i class="iconfont icon-blogger"></i>技术博客</a></li>
+                        <li><a href="#docs"><i class="iconfont icon-wendangdocument78"></i>开发文档</a></li>
+                        <li><a href="#tools"><i class="iconfont icon-tool"></i>实用工具</a></li>
+                        <li><a href="#design"><i class="iconfont icon-designer"></i>设计资源</a></li>
+                        <li><a href="#study"><i class="iconfont icon-xuexi1"></i>学无止境</a></li>
+                        <li><a href="#operation"><i class="iconfont icon-yunying"></i>网络运营</a></li>
+                        <li class="download"><a href="#dourcedown"><i class="iconfont icon-github"></i>源码下载</a></li>
+                    </ul>
+                    <div class="item comment"><a target="_blank" href="http://www.diyizhan.tw/tangmingblog"><i class="iconfont icon-liuyan"></i>留言</a></div>
+                </nav>
+            </aside>
+            <section class="main">
+                <div id="mainContent">
+                    <!-- 手机端菜单 -->
+                    <div id="menu-box">
+                        <div id="menu">
+                            <input type="checkbox" id="menu-form">
+                            <label for="menu-form" class="menu-spin">
+                                <div class="line diagonal line-1"></div>
+                                <div class="line horizontal"></div>
+                                <div class="line diagonal line-2"></div>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- 开发社区 -->
+                    <div class="box">
+                        <a href="#" name="bbs"></a>
+                        <div class="sub-category">
+                            <div><i class="iconfont icon-shequ"></i>开发社区</div>
+                        </div>
+                        <div>
+                            <a target="_blank" href="https://www.csdn.net">
+                                <div class="item">
+                                    <div class="logo"><img src="https://www.csdn.net/favicon.ico" alt="CNDS"> CNDS</div>
+                                    <div class="desc">中国最大的IT社区和服务平台</div>
+                                </div>
+                            </a>
+                            <a href="https://juejin.im/">
+                                <div class="item">
+                                    <div class="logo"><img src="https://juejin.im/favicon.ico" alt="掘金"> 掘金</div>
+                                    <div class="desc">只有高手分享的中文技术社区</div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="https://github.com/">
+                                <div class="item">
+                                    <div class="logo"><img src="https://github.com/favicon.ico" alt="github"> github</div>
+                                    <div class="desc">面向开源及私有软件项目的git托管平台</div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="http://stackoverflow.com/">
+                                <div class="item">
+                                    <div class="logo"><img src="http://stackoverflow.com/favicon.ico" alt="stackoverflow"> stackoverflow</div>
+                                    <div class="desc">国外编程相关的IT技术问答网站</div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="https://segmentfault.com/">
+                                <div class="item">
+                                    <div class="logo"><img src="https://segmentfault.com/favicon.ico" alt="segmentfault"> segmentfault</div>
+                                    <div class="desc">一个专注于解决编程问题，提高开发技能的社区。</div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="https://www.zhihu.com/">
+                                <div class="item">
+                                    <div class="logo"><img src="https://www.zhihu.com/favicon.ico" alt="知乎"> 知乎</div>
+                                    <div class="desc">与世界分享你的知识、经验和见解与世界分享你的知识、经验和见解</div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="https://www.cnblogs.com/">
+                                <div class="item">
+                                    <div class="logo"><img src="https://www.cnblogs.com/favicon.ico" alt="博客园"> 博客园</div>
+                                    <div class="desc">博客模式的技术分享社区</div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="https://www.oschina.net/">
+                                <div class="item">
+                                    <div class="logo"><img src="https://www.oschina.net/favicon.ico" alt="开源中国"> 开源中国</div>
+                                    <div class="desc">
+                                        <div class="info">
+                                            目前中国最大的开源技术社区
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="https://www.v2ex.com/">
+                                <div class="item">
+                                    <div class="logo"><img src="https://www.v2ex.com//favicon.ico" alt="V2EX"> V2EX</div>
+                                    <div class="desc">一个关于分享和探索的地方。</div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="https://coding.net/">
+                                <div class="item">
+                                    <div class="logo"><img src="https://dn-coding-net-production-static.codehub.cn/platform/favicon.ico" alt=" Coding"> Coding</div>
+                                    <div class="desc">中国最大的git平台。</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 技术博客 -->
+                    <div class="box">
+                        <a href="#" name="sill"></a>
+                        <div class="sub-category">
+                            <div><i class="iconfont icon-blogger"></i>技术博客</div>
+                        </div>
+                        <div>
+                            <a target="_blank" href="http://www.alloyteam.com/">
+                                <div class="item">
+                                    <div class="logo"><img src="http://www.alloyteam.com/favicon.ico" alt="腾讯 AlloyTeam 团队"> 腾讯 AlloyTeam 团队</div>
+                                    <div class="desc">腾讯Web前端团队，代表作品WebQQ，致力于前端技术的研究</div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="https://isux.tencent.com/">
+                                <div class="item">
+                                    <div class="logo"><img src="https://isux.tencent.com/static/images/favicon.ico" alt="ISUX"> ISUX</div>
+                                    <div class="desc">腾讯社交用户体验设计，简称ISUX，腾讯设计团队网站</div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="http://fex.baidu.com/">
+                                <div class="item">
+                                    <div class="logo">
+                                        <img src="http://fex.baidu.com/favicon.ico"> FEX
+                                    </div>
+                                    <div class="desc">
+                                        百度Web前端研发部出品
+                                    </div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="http://taobaofed.org/">
+                                <div class="item">
+                                    <div class="logo">
+                                        <img src="http://img.alicdn.com/tfs/TB1snCqkbj1gK0jSZFuXXcrHpXa-45-45.png"> 淘宝前端团队（FED）
+                                    </div>
+                                    <div class="desc">
+                                        用技术为体验提供无限可能
+                                    </div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="https://aotu.io/">
+                                <div class="item">
+                                    <div class="logo">
+                                        <img src="https://aotu.io/img/favicon-48x48.png"> 凹凸实验室
+                                    </div>
+                                    <div class="desc">
+                                        京东用户体验设计部出品
+                                    </div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="https://75team.com/">
+                                <div class="item">
+                                    <div class="logo">
+                                        <img src="https://75team.com/static/upload/20170523/favicon.ico"> 奇舞团
+                                    </div>
+                                    <div class="desc">
+                                        奇虎360旗下前端开发团队出品
+                                    </div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="http://efe.baidu.com/">
+                                <div class="item">
+                                    <div class="logo">
+                                        <img src="http://efe.baidu.com/favicon.ico"> EFE
+                                    </div>
+                                    <div class="desc">
+                                        由百度多个遵循统一技术体系的前端团队所组成
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 参考文档 -->
+                    <div class="box">
+                        <a href="" name="docs"></a>
+                        <div class="sub-category">
+                            <div><i class="iconfont icon-wendangdocument78"></i>参考文档</div>
+                        </div>
+                        <div>
+                            <a target="_blank" href="http://jquery.cuishifeng.cn/index.html">
+                                <div class="item">
+                                    <div class="logo"><img src="http://jquery.cuishifeng.cn/favicon.ico" alt="jQuery"> jQuery</div>
+                                    <div class="desc">优秀的JavaScript代码库</div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="http://v3.bootcss.com/">
+                                <div class="item">
+                                    <div class="logo"><img src="http://v3.bootcss.com/favicon.ico" alt="Bootstrap"> Bootstrap</div>
+                                    <div class="desc">基于HTML/CSS/Javscript的前端框架</div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="http://v3.bootcss.com/">
+                                <div class="item">
+                                    <div class="logo"><img src="http://v3.bootcss.com/favicon.ico" alt="Vue.js"> Vue.js</div>
+                                    <div class="desc">构建数据驱动的web界面的渐进式框架</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 实用工具 -->
+                    <div class="box">
+                        <a href="" name="tools"></a>
+                        <div class="sub-category">
+                            <div><i class="iconfont icon-tool"></i>实用工具</div>
+                        </div>
+                        <div>
+                            <a target="_blank" href="http://www.ibootstrap.cn/">
+                                <div class="item">
+                                    <div class="no-logo">bootstrap可视化布局</div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="http://www.peise.net/tools/web/">
+                                <div class="item">
+                                    <div class="no-logo">网页配色工具</div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="http://www.uupoop.com/">
+                                <div class="item">
+                                    <div class="no-logo">在线PS</div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="https://dummyimage.com/">
+                                <div class="item">
+                                    <div class="no-logo">动态图像生成器</div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="http://xiuxiu.web.meitu.com/main.html">
+                                <div class="item">
+                                    <div class="no-logo">美图秀秀在线图片处理</div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="https://cli.im/deqr">
+                                <div class="item">
+                                    <div class="no-logo">二维码在线生成</div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="https://www.zybuluo.com/mdeditor">
+                                <div class="item">
+                                    <div class="no-logo">Markdown在线编辑器</div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="http://dwz.wailian.work/">
+                                <div class="item">
+                                    <div class="no-logo">短网址生成</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 设计资源 -->
+                    <div class="box">
+                        <a href="" name="design"></a>
+                        <div class="sub-category">
+                            <div><i class="iconfont icon-wendangdocument78"></i>设计资源</div>
+                        </div>
+                        <div>
+                            <a target="_blank" href="http://www.uigreat.com/">
+                                <div class="item">
+                                    <div class="logo">
+                                        <img src="img/uigreat-favicon.jpg"> UIGREAT
+                                    </div>
+                                    <div class="desc">
+                                        优秀设计师的贴心伴侣。
+                                    </div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="http://huaban.com/">
+                                <div class="item">
+                                    <div class="logo">
+                                        <img src="img/huaban-favicon.png"> 花瓣
+                                    </div>
+                                    <div class="desc">
+                                        花瓣，陪你做生活的设计师。
+                                    </div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="https://dribbble.com/">
+                                <div class="item">
+                                    <div class="logo">
+                                        <img src="img/dribbble-favicon.png"> Dribbble
+                                    </div>
+                                    <div class="desc">
+                                        设计作品的交流平台
+                                    </div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="https://www.behance.net/">
+                                <div class="item">
+                                    <div class="logo">
+                                        <img src="img/behance-favicon.png"> Behance
+                                    </div>
+                                    <div class="desc">
+                                        系列设计作品开放平台
+                                    </div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="https://www.pinterest.com/">
+                                <div class="item">
+                                    <div class="logo">
+                                        <img src="img/pinterest-favicon.png"> Pinterest
+                                    </div>
+                                    <div class="desc">
+                                        图片分享类的社交网站
+                                    </div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="http://www.zcool.com.cn/">
+                                <div class="item">
+                                    <div class="logo">
+                                        <img src="img/zcool-favicon.jpg"> 站酷
+                                    </div>
+                                    <div class="desc">
+                                        打开站酷,发现更好的设计!
+                                    </div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="https://thefwa.com/">
+                                <div class="item">
+                                    <div class="logo">
+                                        <img src="img/thefwa-favicon.png"> FWA
+                                    </div>
+                                    <div class="desc">
+                                        互动多媒体网站收录平台
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 学无止境 -->
+                    <div class="box">
+                        <a href="#" name="study"></a>
+                        <div class="sub-category">
+                            <div><i class="iconfont icon-xuexi1"></i>学无止境</div>
+                        </div>
+                        <div>
+                            <a target="_blank" href="https://www.w3cschool.cn/">
+                                <div class="item">
+                                    <div class="no-logo">w3cschool</div>
+                                    <div class="desc">学编程，从W3cschool开始</div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="https://www.imooc.com/">
+                                <div class="item">
+                                    <div class="no-logo">慕课网</div>
+                                    <div class="desc">程序员的梦工厂</div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="http://study.163.com/">
+                                <div class="item">
+                                    <div class="no-logo">网易云课堂</div>
+                                    <div class="desc">网易公司研发的一款大型在线教育平台服务</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 网络运营 -->
+                    <div class="box">
+                        <a href="" name="operation"></a>
+                        <div class="sub-category">
+                            <div><i class="iconfont icon-yunying"></i>网络运营</div>
+                        </div>
+                        <div>
+                            <a target="_blank" href="https://mp.weixin.qq.com/">
+                                <div class="item">
+                                    <div class="no-logo">微信公众平台</div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="https://www.toutiao.com/">
+                                <div class="item">
+                                    <div class="no-logo">今日头条号</div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="https://www.jianshu.com/">
+                                <div class="item">
+                                    <div class="no-logo">简书</div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="https://mp.dayu.com/">
+                                <div class="item">
+                                    <div class="no-logo">UC大鱼号</div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="http://baijiahao.baidu.com/builder/author/register/index">
+                                <div class="item">
+                                    <div class="no-logo">百度百家号</div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="https://www.weibo.com/login.php">
+                                <div class="item">
+                                    <div class="no-logo">新浪微博</div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="https://om.qq.com/userAuth/index">
+                                <div class="item">
+                                    <div class="no-logo">腾讯企鹅号</div>
+                                </div>
+                            </a>
+                            <a target="_blank" href="https://www.douban.com/">
+                                <div class="item">
+                                    <div class="no-logo">豆瓣</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!--源码下载-->
+                    <div class="box">
+                        <a href="" name="dourcedown"></a>
+                        <div class="sub-category">
+                            <div><i class="iconfont icon-yunying"></i>源码下载</div>
+                        </div>
+                        <div>
+                            <a target="_blank" href="http://www.mycodes.net/">
+                                <div class="item">
+                                    <div class="logo">
+                                        <img src="img/ymzj-favicon.png"> 源码之家
+                                    </div>
+                                    <div class="desc">
+                                        优秀源码集结地。
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!--Code-->
+                    <div class="box">
+                        <a href="" name="coredome"></a>
+                        <div class="sub-category">
+                            <div><i class="iconfont icon-yunying"></i>CoreDome</div>
+                        </div>
+                        <div>
+                            <div class="tabs" v-cloak="">
+                                <div class="tab-2">
+                                    <label for="tab2-1">一</label>
+                                    <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
+                                    <div id="app">
+                                        <h4>第一个标签页</h4>
+                                        <!--差值表达式-->
+                                        {{hello}}
+                                        <!--v-textz可以直接渲染标签的内容-->
+                                        <p v-text="hello"></p>
+                                        <!--v-html  -->
+                                        <p v-html="htmlText"></p>
+                                        <p>{{htmlText}}</p>
+                                        <!--v-bind 对标签属性进行绑定  简写： -->
+                                        <!--v-on 对标签绑定事件  简写@ -->
+                                        <input type="button" id="btn" v-bind:value="buttonText" v-on:click="clickme" />
+                                        <input type="button" id="btn" :value="buttonText2" @click="clickme2" />
+                                    </div>
+                                </div>
+                                <div class="tab-2">
+                                    <label for="tab2-2">二</label>
+                                    <input id="tab2-2" name="tabs-two" type="radio">
+                                    <div id="app2">
+                                        <h4>第二个标签页</h4>
+                                        <p>{{score}}</p>
+                                        <p>{{level}}</p>
+                                        <input type="button" name="" id="" value="开始抽奖" @click="start" />
+                                        <input type="button" name="" id="" value="停止抽奖" @click="stop" />
+
+                                    </div>
+                                </div>
+
+                                <div class="tab-2">
+                                    <label for="tab2-3">三</label>
+                                    <input id="tab2-3" name="tabs-two" type="radio">
+                                    <div id="app3">
+                                        <!--:class 绑定样式 1.绑定数组 2.三元表达式 3.数组嵌套-->
+                                        <!--:style 1.键值对写法2.键值对对象符合json格式-->
+                                        <h4 :class="['backg','fontcolor']">第三个标签页</h4>
+                                        <p :style="[style1,style2]">{{msg}}</p>
+                                        <input type="button" name="" id="" :value="buts" @click="change" /><br />
+                                        <!--v-model 双向绑定,只能绑定value属性-->
+                                        <input type="text" v-model="score" />
+                                        <input type="range" v-model="score" min="0" :max="maxValue" /><br />
+                                        <select v-model="maxValue">
+                                            <option value="100">100</option>
+                                            <option value="1000">1000</option>
+                                            <option value="10000">10000</option>
+                                        </select>
+
+                                        <!--v-for 以可循环四种对象1.普通数组 2.对象数组 3.对象 4.迭代数组，
+                                        默认以索引绑定，需要使用key属性改变默认选中-->
+                                        <div>
+                                            <ul>
+                                                <li v-for="userid in userids">{{userid}}</li>
+                                            </ul>
+                                            <ul>
+                                                <li v-for="user,i in userlist">id:{{user.id}};Name:{{user.name}};索引：{{i}}</li>
+                                            </ul>
+                                            <select name="">
+                                                <option v-for="user,i in userlist" :key="user.id">{{user.name}}</option>
+                                            </select>
+                                            <input type="button" name="" id="" :value="addval" @click="AddUser" />
+                                            <ul>
+                                                <li v-for="item in 10">{{item}}</li>
+                                            </ul>
+                                            <ul>
+                                                <li v-for="value,key,i in userinfo">值：{{value}} ; 键：{{key}} ; 索引：{{i}}</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <!--v-if  v-show  都是显示隐藏，v-show只是将元素加隐藏样式          -->
+                                            <p v-if="isif">v-if</p>
+                                            <p v-show="isshow">v-show</p>
+                                        </div>
+                                        <div>
+                                            <table border="" cellspacing="" cellpadding="">
+                                                <tr>
+                                                    <th>编号</th>
+                                                    <th>姓名</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                                <tr v-for="user,i in userlist" :class="{'oddstyle':isodd(i)}">
+                                                    <td>{{user.id}}</td>
+                                                    <td v-text="user.name"></td>
+                                                    <td @click="remove(i)">删除</td>
+                                                </tr>
+                                            </table>
+                                            <input type="text" name="" id="" v-model="id" />
+                                            <input type="text" name="" id="" value="" v-model="username" />
+                                            <input type="button" name="" id="" :value="addval" @click="addtableuser" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <script type="text/javascript">
+                                var vm = new Vue({
+                                    el: "#app",
+                                    data: {
+                                        hello: "Hello World!!",
+                                        htmlText: "<b>加粗</b>",
+                                        buttonText: "点击1",
+                                        buttonText2: "点击2"
+                                    },
+                                    methods: {
+                                        clickme() {
+                                            this.buttonText = "已点击1";
+                                        },
+                                        clickme2() {
+                                            this.buttonText2 = "已点击2";
+                                        }
+                                    }
+
+                                });
+
+                                var vm2 = new Vue({
+                                    el: "#app2",
+                                    data: {
+                                        score: 0,
+                                        level: null,
+                                        intervalIndex: null
+                                    },
+                                    methods: {
+                                        start() {
+                                            if (this.intervalIndex == null) {
+                                                this.intervalIndex = setInterval(() => {
+                                                    this.score = parseInt(Math.random() * 100);
+                                                    switch (true) {
+                                                        case this.score < 30:
+                                                            this.level = "参与奖";
+                                                            break;
+                                                        case this.score >= 30 && this.score < 65:
+                                                            this.level = "三等奖";
+                                                            break;
+                                                        case this.score >= 65 && this.score <= 85:
+                                                            this.level = "二等奖";
+                                                            break;
+                                                        case this.score >= 85:
+                                                            this.level = "一等奖";
+                                                            break;
+                                                    }
+                                                }, 50);
+                                            }
+
+
+                                        },
+                                        stop() {
+                                            clearInterval(this.intervalIndex);
+                                            this.intervalIndex = null;
+                                        }
+                                    }
+
+                                });
+
+                                var vm3 = new Vue({
+                                    el: "#app3",
+                                    data: {
+                                        score: 50,
+                                        maxValue: 100,
+                                        msg: "Hello World!!",
+                                        style1: { 'background-color': 'brown', color: 'white' },
+                                        style2: { 'font-size': '18px' },
+                                        buts: "点击改变",
+                                        userids: [1, 2, 3],
+                                        userlist: [
+                                            { id: 1, name: "张三" },
+                                            { id: 2, name: "李四" },
+                                            { id: 3, name: "王五" }
+                                        ],
+                                        userinfo: { id: 4, name: "赵六" },
+                                        addval: "Add",
+                                        isif: true,
+                                        isshow: true,
+                                        id: 4,
+                                        username: ""
+                                    },
+                                    methods: {
+                                        change() {
+                                            this.style2['font-size'] = '22px';
+                                        },
+                                        AddUser() {
+                                            this.userlist.unshift({ id: 4, name: "田七" });
+                                        },
+                                        isodd(i) {
+                                            var res = i % 2;
+                                            if (res == 1) {
+                                                return true;
+                                            } else {
+                                                return false;
+                                            }
+                                        },
+                                        addtableuser() {
+                                            this.userlist.push({ id: this.id++, name: this.username });
+                                        },
+                                        remove(i) {
+                                            this.userlist.splice(i, 1);
+                                            //delete this.userlist[i];--无刷新
+
+                                        }
+                                    }
+
+                                });
+
+
+
+                            </script>
+                            <style type="text/css">
+                                table {
+                                    width: 600px;
+                                    border-collapse: collapse;
+                                }
+
+                                    table td {
+                                        border: 1px solid #FF0000;
+                                    }
+
+                                .oddstyle {
+                                    background-color: rgb(255,168,168);
+                                }
+                            </style>
+                            <style>
+                                .backg {
+                                    background-color: aquamarine;
+                                }
+
+                                .fontcolor {
+                                    color: red;
+                                }
+
+                                .fontcolor1 {
+                                    color: deepskyblue;
+                                }
+                            </style>
+
+
+                            <style>
+                                [v-cloak] {
+                                    display: none;
+                                }
+
+                                .tabs {
+                                    display: block;
+                                    display: -webkit-flex;
+                                    display: -moz-flex;
+                                    display: flex;
+                                    -webkit-flex-wrap: wrap;
+                                    -moz-flex-wrap: wrap;
+                                    flex-wrap: wrap;
+                                    margin: 0;
+                                    overflow: hidden;
+                                }
+
+                                    .tabs [class^="tab"] label,
+                                    .tabs [class*=" tab"] label {
+                                        width: 30%;
+                                        cursor: pointer;
+                                        display: block;
+                                        font-size: 1.1em;
+                                        font-weight: 300;
+                                        line-height: 1em;
+                                        padding: 2rem 0;
+                                        text-align: center;
+                                    }
+
+                                    .tabs [class^="tab"] [type="radio"],
+                                    .tabs [class*=" tab"] [type="radio"] {
+                                        cursor: pointer;
+                                        -webkit-appearance: none;
+                                        -moz-appearance: none;
+                                        appearance: none;
+                                        display: block;
+                                        width: 30%;
+                                        -webkit-transition: all 0.3s ease-in-out;
+                                        -moz-transition: all 0.3s ease-in-out;
+                                        -o-transition: all 0.3s ease-in-out;
+                                        transition: all 0.3s ease-in-out;
+                                    }
+
+                                        .tabs [class^="tab"] [type="radio"]:hover, .tabs [class^="tab"] [type="radio"]:focus,
+                                        .tabs [class*=" tab"] [type="radio"]:hover,
+                                        .tabs [class*=" tab"] [type="radio"]:focus {
+                                            /*    tab标签选中的颜色标志      */
+                                            border-bottom: 1px solid #40a9ff;
+                                        }
+
+                                        .tabs [class^="tab"] [type="radio"]:checked,
+                                        .tabs [class*=" tab"] [type="radio"]:checked {
+                                            border-bottom: 2px solid #40a9ff;
+                                        }
+
+                                            .tabs [class^="tab"] [type="radio"]:checked + div,
+                                            .tabs [class*=" tab"] [type="radio"]:checked + div {
+                                                opacity: 1;
+                                            }
+
+                                        .tabs [class^="tab"] [type="radio"] + div,
+                                        .tabs [class*=" tab"] [type="radio"] + div {
+                                            display: block;
+                                            opacity: 0;
+                                            padding: 2rem 0;
+                                            width: 90%;
+                                            -webkit-transition: all 0.3s ease-in-out;
+                                            -moz-transition: all 0.3s ease-in-out;
+                                            -o-transition: all 0.3s ease-in-out;
+                                            transition: all 0.3s ease-in-out;
+                                        }
+
+                                    .tabs .tab-2 {
+                                        width: 30%;
+                                    }
+
+                                        .tabs .tab-2 [type="radio"] + div {
+                                            width: 200%;
+                                            margin-left: 200%;
+                                        }
+
+                                        .tabs .tab-2 [type="radio"]:checked + div {
+                                            margin-left: 0;
+                                        }
+
+                                        .tabs .tab-2:last-child [type="radio"] + div {
+                                            margin-left: 100%;
+                                        }
+
+                                        .tabs .tab-2:last-child [type="radio"]:checked + div {
+                                            margin-left: -100%;
+                                        }
+                            </style>
+
+                            <footer>
+                                <style>
+                                    color {
+                                        background-image: linear-gradient(135deg, deeppink, dodgerblue);
+                                        font-size: 20px;
+                                        font-weight: bold;
+                                        -webkit-background-clip: text;
+                                        -moz-background-clip: text;
+                                        background-clip: text;
+                                        box-decoration-break: clone;
+                                        -webkit-box-decoration-break: clone;
+                                        -moz-box-decoration-break: clone;
+                                        color: transparent;
+                                    }
+                                </style>
+                                <color>新春快乐 大吉大利 <br>勤洗手 戴口罩<br>没事别瞎跑 狗命要紧</color>
+                            </footer>
+                        </div>
+                    </div>
+                    <footer class="footer">
+                        <div class="copyright">
+                            <div>
+                                Copyright © 2018- 2050
+                                <a href="http://www.diyizhan.tw/tangmingblog">第一站导航 TangMing博客</a>
+                            </div>
+                        </div>
+                    </footer>
+                    <div id="fixedBar">
+                        <svg class="Zi Zi--BackToTop" title="回到顶部" fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M16.036 19.59a1 1 0 0 1-.997.995H9.032a.996.996 0 0 1-.997-.996v-7.005H5.03c-1.1 0-1.36-.633-.578-1.416L11.33 4.29a1.003 1.003 0 0 1 1.412 0l6.878 6.88c.782.78.523 1.415-.58 1.415h-3.004v7.005z"></path></svg>
+                    </div>
+                </div>
+            </section>
+            <script>
+                var oMenu = document.getElementById('menu');
+                var oLeftBar = document.getElementById('leftBar');
+                var menuFrom = document.getElementById('menu-form');
+
+                oMenu.onclick = function () {
+                    if (oLeftBar.offsetLeft == 0) {
+                        oLeftBar.style.left = -249 + 'px';
+                    }
+                    else {
+                        oLeftBar.style.left = 0;
+                    }
+                }
+
+
+                // 监听页面宽度变化
+                window.onresize = function () {
+                    judgeWidth();
+                    // console.log(document.documentElement.clientWidth);
+                };
+
+                // 判断页面宽度
+                function judgeWidth() {
+                    if (document.documentElement.clientWidth > 481) {
+                        oLeftBar.style.left = 0;
+                    } else {
+                        oLeftBar.style.left = -249 + 'px';
+                    }
+                }
+
+
+                var oNavItem = document.getElementById('navItem');
+                var aA = oNavItem.getElementsByTagName('a');
+                for (var i = 0; i < aA.length; i++) {
+                    aA[i].onclick = function () {
+                        for (var j = 0; j < aA.length; j++) {
+                            aA[j].className = '';
+                        }
+                        this.className = 'active';
+                        if (oLeftBar.offsetLeft == 0) {
+                            if (document.documentElement.clientWidth <= 481) {
+                                oLeftBar.style.left = -249 + 'px';
+                                menuFrom.checked = false;
+
+                            }
+                        }
+                    }
+                }
+
+
+                $(window).scroll(function () {
+                    if ($(window).scrollTop() >= 200) {
+                        $('#fixedBar').fadeIn(300);
+                    } else {
+                        $('#fixedBar').fadeOut(300);
+                    }
+                });
+                $('#fixedBar').click(function () {
+                    $('html,body').animate({ scrollTop: '0px' }, 800);
+                })
+            </script>
+        </div>
+        <style type="text/css">
+
+            @font-face {
+                font-family: "iconfont";
+                src: url('iconfont.eot?t=1516947764295'); /* IE9*/
+                src: url('iconfont.eot?t=1516947764295#iefix') format('embedded-opentype'), /* IE6-IE8 */
+                url('data:application/x-font-woff;charset=utf-8;base64,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') format('woff'), url('iconfont.ttf?t=1516947764295') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+                url('iconfont.svg?t=1516947764295#iconfont') format('svg'); /* iOS 4.1- */
+            }
+
+            .iconfont {
+                font-family: "iconfont" !important;
+                font-size: 16px;
+                font-style: normal;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+
+            .icon-shequ:before {
+                content: "\e600";
+            }
+
+            .icon-designer:before {
+                content: "\e613";
+            }
+
+            .icon-wendangdocument78:before {
+                content: "\e723";
+            }
+
+            .icon-blogger:before {
+                content: "\e6a4";
+            }
+
+            .icon-daohang2:before {
+                content: "\e614";
+            }
+
+            .icon-liuyan:before {
+                content: "\e638";
+            }
+
+            .icon-tool:before {
+                content: "\e64d";
+            }
+
+            .icon-xuexi1:before {
+                content: "\e63b";
+            }
+
+            .icon-zixun:before {
+                content: "\e6af";
+            }
+
+            .icon-yunying:before {
+                content: "\e6aa";
+            }
+
+            .icon-daohang:before {
+                content: "\e611";
+            }
+
+            .icon-github:before {
+                content: "\e601";
+            }
+
+            .icon-daohang1:before {
+                content: "\e63d";
+            }
+
+            .icon-xuexi:before {
+                content: "\e604";
+            }
+
+            a, aside, body, div, footer, html, i, img, li, nav, p, section, ul {
+                padding: 0;
+                margin: 0
+            }
+
+            li {
+                list-style: none
+            }
+
+            a {
+                text-decoration: none
+            }
+
+            body {
+                font-size: 12px;
+                color: #4d4d4d;
+                font-family: Helvetica Neue,Microsoft Yahei
+            }
+
+            .container, .main, body {
+                background: #f3f6f8
+            }
+
+            .iconfont {
+                color: #6b7386;
+                padding-right: 4px
+            }
+
+            .container .left-bar {
+                position: fixed;
+                padding: 0 20px;
+                background: #30333c;
+                color: #6b7386;
+                box-sizing: border-box;
+                flex-direction: column;
+                height: 100vh;
+                display: flex;
+                width: 248px;
+                transition: all .5s
+            }
+
+            .container .main {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                -webkit-box-orient: vertical;
+                margin-left: 248px
+            }
+
+                .container .main .iconfont {
+                    font-size: 18px;
+                    color: #000
+                }
+
+            .set-scroll {
+                background-color: #494f5e;
+                border-radius: 0;
+                width: 4px
+            }
+
+            .left-bar .title {
+                color: #fff;
+                font-size: 18px;
+                height: 50px;
+                line-height: 50px
+            }
+
+                .left-bar .title p {
+                    text-align: center
+                }
+
+            .left-bar .nav {
+                flex: 1;
+                -webkit-box-flex: 1;
+                flex-grow: 1
+            }
+
+                .left-bar .nav .item {
+                    height: 48px;
+                    line-height: 46px;
+                    border-top: 2px solid rgba(255,255,255,.04);
+                    border-bottom: 2px solid rgba(255,255,255,.04)
+                }
+
+                .left-bar .nav > .active {
+                    position: relative
+                }
+
+                    .left-bar .nav > .active .line {
+                        position: absolute;
+                        right: 0;
+                        height: 30px;
+                        width: 3px;
+                        background: #3a85ff;
+                        z-index: 100000;
+                        margin-top: 10px
+                    }
+
+            .left-bar .nav-item {
+                min-height: 100vh;
+                overflow-y: scroll
+            }
+
+                .left-bar .nav-item::-webkit-scrollbar-track {
+                    background-color: #494f5e;
+                    border-radius: 0;
+                    width: 4px
+                }
+
+                .left-bar .nav-item::-webkit-scrollbar-thumb {
+                    background-color: #494f5e;
+                    border-radius: 0;
+                    width: 4px
+                }
+
+                .left-bar .nav-item::-webkit-scrollbar {
+                    background-color: #494f5e;
+                    border-radius: 0;
+                    width: 4px
+                }
+
+                .left-bar .nav-item li {
+                    padding-left: 20px;
+                    height: 32px;
+                    line-height: 32px
+                }
+
+                    .left-bar .nav-item li:hover a, .left-bar .nav-item li:hover i, .left-bar .nav-item li > .active, .left-bar .nav-item li > .active i {
+                        color: #fff
+                    }
+
+                    .left-bar .nav-item li a {
+                        text-decoration: none;
+                        font-size: 12px;
+                        display: inline-block;
+                        width: 100%;
+                        color: #6b7386
+                    }
+
+            .nav .item a {
+                color: #fff
+            }
+
+            .nav .comment {
+                position: fixed;
+                z-index: 100;
+                bottom: 1px;
+                width: 200px;
+                background: #30333c
+            }
+
+            .main #mainContent {
+                max-width: 1200px
+            }
+
+            .main .box {
+                overflow: hidden;
+                margin: 20px 30px;
+                background: #fff;
+                padding-bottom: 20px
+            }
+
+                .main .box .sub-category > div {
+                    padding: 12px 0 0 2.1%;
+                    font-size: 18px
+                }
+
+                .main .box .item {
+                    width: 20%;
+                    border: 1px solid #e4ecf3;
+                    box-shadow: 1px 2px 3px #f2f6f8;
+                    border-radius: 6px;
+                    background: #fff;
+                    padding: 10px;
+                    min-width: 200px;
+                    margin: 22px 0 0 2.1%;
+                    float: left;
+                    overflow: hidden;
+                    transition: all .3s
+                }
+
+                    .main .box .item:hover {
+                        transform: translateY(-5px)
+                    }
+
+                    .main .box .item .no-logo {
+                        color: #3273dc;
+                        font-weight: 700;
+                        font-size: 14px
+                    }
+
+                    .main .box .item .logo {
+                        height: 40px;
+                        position: relative;
+                        font-size: 14px;
+                        font-weight: 700;
+                        color: #3273dc;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        padding: 0 .1rem
+                    }
+
+                        .main .box .item .logo img {
+                            width: 40px;
+                            height: 40px;
+                            border-radius: 50%;
+                            vertical-align: middle
+                        }
+
+                    .main .box .item .desc {
+                        color: gray;
+                        font-size: 12px;
+                        padding-top: 10px;
+                        height: 35px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical
+                    }
+
+            .footer {
+                width: 100%;
+                bottom: 0;
+                line-height: 45px;
+                background: #fff;
+                box-shadow: 0 0 1rem rgba(0,0,0,.2)
+            }
+
+                .footer .copyright {
+                    margin-left: 30px;
+                    color: #949494;
+                    font-size: 12px
+                }
+
+                    .footer .copyright a {
+                        text-decoration: none;
+                        color: #3a85ff
+                    }
+
+            #menu-box {
+                display: none;
+                width: 100%;
+                background: #fff;
+                text-align: right;
+                position: sticky;
+                top: 0;
+                z-index: 2;
+                box-shadow: 1px 1px 8px #e0ddf;
+                height: 50px
+            }
+
+                #menu-box #menu {
+                    height: 50px;
+                    width: 40px;
+                    position: absolute;
+                    right: 10px
+                }
+
+                    #menu-box #menu * {
+                        transition: all .3s;
+                        -webkit-transition: all .3s;
+                        box-sizing: border-box
+                    }
+
+                    #menu-box #menu input[type=checkbox] {
+                        display: none
+                    }
+
+                        #menu-box #menu input[type=checkbox]:checked ~ .menu-spin > .horizontal {
+                            opacity: 0
+                        }
+
+                        #menu-box #menu input[type=checkbox]:checked ~ .menu-spin > .line-1 {
+                            transform: rotate(405deg);
+                            -webkit-transform: rotate(405deg);
+                            margin-top: 10px
+                        }
+
+                        #menu-box #menu input[type=checkbox]:checked ~ .menu-spin > .line-2 {
+                            transform: rotate(-405deg);
+                            -webkit-transform: rotate(-405deg);
+                            margin-top: -10px
+                        }
+
+                    #menu-box #menu label {
+                        cursor: pointer;
+                        position: absolute;
+                        z-index: 99;
+                        height: 100%;
+                        width: 100%;
+                        top: 10px;
+                        left: 0
+                    }
+
+                        #menu-box #menu label .line {
+                            position: absolute;
+                            height: 4px;
+                            width: 100%;
+                            background-color: #a2a2a2
+                        }
+
+                        #menu-box #menu label .horizontal {
+                            top: 10px
+                        }
+
+                        #menu-box #menu label .line-2 {
+                            top: 20px
+                        }
+
+            .download a, .download i {
+                color: #3668bd !important
+            }
+
+            #fixedBar {
+                padding: 10px;
+                background: #fff;
+                width: 25px;
+                height: 25px;
+                position: fixed;
+                right: 10px;
+                bottom: 30px;
+                z-index: 9999;
+                box-shadow: 0 0 20 #eee;
+                box-shadow: 0 0 20px #ccc;
+                cursor: pointer;
+                display: none
+            }
+
+                #fixedBar svg {
+                    color: #9e9e9e
+                }
+
+            @media screen and (max-width:481px) {
+                .container .box .item {
+                    width: 39%;
+                    min-width: 100px
+                }
+
+                .container .main {
+                    margin-left: 0
+                }
+
+                .container .left-bar {
+                    z-index: 999;
+                    left: -249px
+                }
+
+                #menu-box {
+                    display: block
+                }
+            }
+
+            @media screen and (min-width:481px) {
+                .container .left-bar {
+                    left: 0
+                }
+            }
+
+            @media screen and (min-width:482px) and (max-width:789px) {
+                .container .box .item {
+                    width: 90%
+                }
+
+                .container .left-bar {
+                    left: 0
+                }
+            }
+
+            @media screen and (min-width:790px) and (max-width:1039px) {
+                .container .box .item {
+                    width: 43%
+                }
+            }
+
+            @media screen and (min-width:1040px) and (max-width:1920px) {
+                .container .box .item {
+                    width: 20%
+                }
+            }
+
+            @bg-color: #f3f6f8;
+
+            html, body, aside, div, p, nav, a,
+            i, ul, li, section, img, footer {
+                padding: 0;
+                margin: 0;
+            }
+
+            li {
+                list-style: none;
+            }
+
+            a {
+                text-decoration: none;
+            }
+
+            body {
+                font-size: 12px;
+                color: #4d4d4d;
+                font-family: Helvetica Neue,Microsoft Yahei;
+            }
+
+            body, .main, .container {
+                background: #f3f6f8;
+            }
+
+            .iconfont {
+                color: #6b7386;
+                padding-right: 4px;
+            }
+
+
+            .container {
+                .left-bar
+
+            {
+                position: fixed;
+                padding: 0 20px;
+                background: #30333c;
+                color: #6b7386;
+                box-sizing: border-box;
+                flex-direction: column;
+                height: 100vh;
+                display: flex;
+                width: 248px;
+                transition: all .5s;
+            }
+
+            .main {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                -webkit-box-orient: vertical;
+                margin-left: 248px;
+                .iconfont
+
+            {
+                font-size: 18px;
+                color: #000000;
+            }
+
+            }
+            }
+
+
+            .set-scroll {
+                background-color: #494f5e;
+                border-radius: 0;
+                width: 4px;
+            }
+
+
+            .left-bar {
+                .title
+
+            {
+                color: white;
+                font-size: 18px;
+                height: 50px;
+                line-height: 50px;
+                p
+
+            {
+                text-align: center;
+            }
+
+            }
+
+            .nav {
+                flex: 1;
+                -webkit-box-flex: 1;
+                flex-grow: 1;
+                .item
+
+            {
+                height: 48px;
+                line-height: 46px;
+                border-top: 2px solid hsla(0,0%,100%,.04);
+                border-bottom: 2px solid hsla(0,0%,100%,.04);
+            }
+
+            > .active {
+                position: relative;
+                .line
+
+            {
+                position: absolute;
+                right: 0px;
+                height: 30px;
+                width: 3px;
+                background: #3a85ff;
+                z-index: 100000;
+                margin-top: 10px;
+            }
+
+            }
+            }
+
+            .nav-item {
+                min-height: 100vh;
+                overflow-y: scroll;
+                &::-webkit-scrollbar-track
+
+            {
+                .set-scroll;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                .set-scroll;
+            }
+
+            &::-webkit-scrollbar {
+                .set-scroll;
+            }
+
+            li {
+                padding-left: 20px;
+                height: 32px;
+                line-height: 32px;
+                >.active,>.active i, &:hover a, &:hover i
+
+            {
+                color: #fff;
+            }
+
+            a {
+                text-decoration: none;
+                font-size: 12px;
+                display: inline-block;
+                width: 100%;
+                color: #6b7386;
+            }
+
+            }
+            }
+            }
+
+
+            .nav {
+                .item
+
+            {
+                a
+
+            {
+                color: white;
+            }
+
+            }
+
+            .comment {
+                position: fixed;
+                z-index: 100;
+                bottom: 1px;
+                width: 200px;
+                background: #30333c;
+            }
+
+            }
+
+            .main {
+                #mainContent
+
+            {
+                max-width: 1200px;
+            }
+
+            .box {
+                overflow: hidden;
+                margin: 20px 30px;
+                background: #fff;
+                padding-bottom: 20px;
+                .sub-category
+
+            {
+                >div
+
+            {
+                padding: 12px 0 0 2.1%;
+                font-size: 18px;
+            }
+
+            }
+
+            .item {
+                width: 20%;
+                border: 1px solid #e4ecf3;
+                box-shadow: 1px 2px 3px #f2f6f8;
+                border-radius: 6px;
+                background: #fff;
+                padding: 10px;
+                min-width: 200px;
+                margin: 22px 0 0 2.1%;
+                float: left;
+                overflow: hidden;
+                transition: all .3s;
+                &:hover
+
+            {
+                transform: translateY(-5px);
+            }
+
+            .no-logo {
+                color: #3273dc;
+                font-weight: bold;
+                font-size: 14px;
+            }
+
+            .logo {
+                height: 40px;
+                position: relative;
+                font-size: 14px;
+                font-weight: 700;
+                color: #3273dc;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                padding: 0 .1rem;
+                img
+
+            {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                vertical-align: middle;
+            }
+
+            }
+
+
+            .desc {
+                color: gray;
+                font-size: 12px;
+                padding-top: 10px;
+                height: 35px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+            }
+
+            }
+            }
+            }
+
+            // 页脚
+            .footer {
+                width: 100%;
+                bottom: 0;
+                line-height: 45px;
+                background: #fff;
+                box-shadow: 0 0 1rem rgba(0,0,0,.2);
+                .copyright
+
+            {
+                margin-left: 30px;
+                color: #949494;
+                font-size: 12px;
+                a
+
+            {
+                text-decoration: none;
+                color: #3a85ff;
+            }
+
+            }
+            }
+
+
+            #menu-box {
+                display: none;
+                width: 100%;
+                background: #ffffff;
+                text-align: right;
+                position: sticky;
+                top: 0;
+                z-index: 2;
+                box-shadow: 1px 1px 8px #e0ddf;
+                height: 50px;
+                #menu
+
+            {
+                *
+
+            {
+                transition: all 0.3s;
+                -webkit-transition: all 0.3s;
+                box-sizing: border-box;
+            }
+
+            height: 50px;
+            width: 40px;
+            position: absolute;
+            right: 10px;
+            input[type=checkbox] {
+                display: none;
+            }
+
+            input[type=checkbox]:checked ~ .menu-spin > .horizontal {
+                opacity: 0;
+            }
+
+            input[type=checkbox]:checked ~ .menu-spin > .line-1 {
+                transform: rotate(405deg);
+                -webkit-transform: rotate(405deg);
+                margin-top: 10px;
+            }
+
+            input[type=checkbox]:checked ~ .menu-spin > .line-2 {
+                transform: rotate(-405deg);
+                -webkit-transform: rotate(-405deg);
+                margin-top: -10px;
+            }
+
+            label {
+                cursor: pointer;
+                position: absolute;
+                z-index: 99;
+                height: 100%;
+                width: 100%;
+                top: 10px;
+                left: 0;
+                .line
+
+            {
+                position: absolute;
+                height: 4px;
+                width: 100%;
+                background-color: #a2a2a2;
+            }
+
+            .horizontal {
+                top: 10px;
+            }
+
+            .line-2 {
+                top: 20px;
+            }
+
+            }
+            }
+            }
+
+            .download {
+                a,i
+
+            {
+                color: #3668bd !important;
+            }
+
+            }
+
+
+            #fixedBar {
+                padding: 10px;
+                background: #fff;
+                width: 25px;
+                height: 25px;
+                position: fixed;
+                right: 10px;
+                bottom: 30px;
+                z-index: 9999;
+                box-shadow: 0 0 20 #eee;
+                box-shadow: 0 0 20px #ccc;
+                cursor: pointer;
+                display: none;
+                svg
+
+            {
+                color: #9e9e9e;
+            }
+
+            }
+
+
+
+
+            @media screen and (max-width: 481px) {
+                .container .box .item {
+                    width: 39%;
+                    min-width: 100px;
+                }
+
+                .container .main {
+                    margin-left: 0;
+                }
+
+                .container .left-bar {
+                    z-index: 999;
+                    left: -249px;
+                }
+
+                #menu-box {
+                    display: block;
+                }
+            }
+
+            @media screen and (min-width: 481px) {
+                .container .left-bar {
+                    left: 0;
+                }
+            }
+
+            @media screen and (min-width: 482px) and (max-width: 789px) {
+                .container .box .item {
+                    width: 90%;
+                }
+
+                .container .left-bar {
+                    left: 0px;
+                }
+            }
+
+            @media screen and (min-width: 790px) and (max-width: 1039px) {
+                .container .box .item {
+                    width: 43%;
+                }
+            }
+
+            @media screen and (min-width: 1040px) and (max-width: 1920px) {
+                .container .box .item {
+                    width: 20%;
+                }
+            }
+        </style>
+    </div>
+
 
     <script type="text/javascript">
-        var vm = new Vue({
-            el: "#app",
-            data: {
-                hello: "Hello World!!",
-                htmlText:"<b>加粗</b>",
-                buttonText:"点击1",
-                buttonText2:"点击2"
-            },
-            methods:{
-            	clickme(){
-            		this.buttonText="已点击1";
-            	},
-            	clickme2(){
-            		this.buttonText2="已点击2";
-            	}
-            }
-            
-        });
-        
-        var vm2=new Vue({
-        	el:"#app2",
-        	data:{
-        		score:0,
-        		level:null,
-        		intervalIndex:null
-        	},
-        	methods:{
-        		start(){
-        			if(this.intervalIndex==null){
-        				this.intervalIndex=setInterval(()=>{
-        				this.score=parseInt(Math.random()*100);
-        				switch(true){
-        					case this.score<30:
-        					this.level="参与奖";
-        					break;
-        					case this.score>=30&&this.score<65:
-        					this.level="三等奖";
-        					break;
-        					case this.score>=65&&this.score<=85:
-        					this.level="二等奖";
-        					break;
-        					case this.score>=85:
-        					this.level="一等奖";
-        					break;
-	        				}
-	        			},50);
-        			}
-        			
-        			
-        		},
-        		stop(){
-        			clearInterval(this.intervalIndex);
-        			this.intervalIndex=null;
-        		}
-        	}
-        	
-        });
-        
-        var vm3=new Vue({
-        	el:"#app3",
-        	data:{
-        		score:50,
-        		maxValue:100,
-        		msg:"Hello World!!",
-        		style1:{'background-color':'brown',color:'white'},
-        		style2:{'font-size':'18px'},
-        		buts:"点击改变",
-        		userids:[1,2,3],
-        		userlist:[
-        			{id:1,name:"张三"},
-        			{id:2,name:"李四"},
-        			{id:3,name:"王五"}
-        		],
-        		userinfo:{id:4,name:"赵六"},
-        		addval:"Add",
-        		isif:true,
-        		isshow:true,
-        		id:4,
-        		username:""
-        	},
-        	methods:{
-        		change(){
-        			this.style2['font-size']='22px';
-        		},
-        		AddUser(){
-        			this.userlist.unshift({id:4,name:"田七"});
-        		},
-        		isodd(i){
-        			var res=i%2;
-        			if(res==1){
-        				return true;
-        			}else{
-        				return false;
-        			}
-        		},
-        		addtableuser(){
-        			this.userlist.push({id:this.id++,name:this.username});
-        		},
-        		remove(i){
-        			this.userlist.splice(i,1);
-        			//delete this.userlist[i];--无刷新
-        			
-        		}
-        	}
-        	
-        });
-        
-        
-        
+
+
     </script>
-    <style type="text/css">
-      		table{
-      			width: 600px;
-      			border-collapse: collapse;
-      		}
-      		table td{
-      			border: 1px solid #FF0000;
-      		}
-      		.oddstyle{
-      			background-color: rgb(255,168,168);
-      		}
-      	</style>
-    <style>
-    	.backg{
-    		background-color: aquamarine;
-    	}
-    	.fontcolor{
-    		color:red;
-    	}
-    	.fontcolor1{
-    		color: deepskyblue;
-    	}
-    </style>
-    
-    
-    <style>
-    	[v-cloak]{
-			display: none;
-		}
-		.tabs {
-		  display: block;
-		  display: -webkit-flex;
-		  display: -moz-flex;
-		  display: flex;
-		  -webkit-flex-wrap: wrap;
-		  -moz-flex-wrap: wrap;
-		  flex-wrap: wrap;
-		  margin: 0;
-		  overflow: hidden; }
-		.tabs [class^="tab"] label,
-		.tabs [class*=" tab"] label {
-			width: 30%;
-		    cursor: pointer;
-		    display: block;
-		    font-size: 1.1em;
-		    font-weight: 300;
-		    line-height: 1em;
-		    padding: 2rem 0;
-		    text-align: center; }
-		  .tabs [class^="tab"] [type="radio"],
-		  .tabs [class*=" tab"] [type="radio"] {
-		    cursor: pointer;
-		    -webkit-appearance: none;
-		    -moz-appearance: none;
-		    appearance: none;
-		    display: block;
-		    width: 30%;
-		    -webkit-transition: all 0.3s ease-in-out;
-		    -moz-transition: all 0.3s ease-in-out;
-		    -o-transition: all 0.3s ease-in-out;
-		    transition: all 0.3s ease-in-out; }
-		    .tabs [class^="tab"] [type="radio"]:hover, .tabs [class^="tab"] [type="radio"]:focus,
-		    .tabs [class*=" tab"] [type="radio"]:hover,
-		    .tabs [class*=" tab"] [type="radio"]:focus {
-		/*    tab标签选中的颜色标志      */
-		      border-bottom: 1px solid #40a9ff;
-		}
-		    .tabs [class^="tab"] [type="radio"]:checked,
-		    .tabs [class*=" tab"] [type="radio"]:checked {
-		      border-bottom: 2px solid #40a9ff; 
-		}
-		    .tabs [class^="tab"] [type="radio"]:checked + div,
-		    .tabs [class*=" tab"] [type="radio"]:checked + div {
-		      opacity: 1; }
-		    .tabs [class^="tab"] [type="radio"] + div,
-		    .tabs [class*=" tab"] [type="radio"] + div {
-		      display: block;
-		      opacity: 0;
-		      padding: 2rem 0;
-		      width: 90%;
-		      -webkit-transition: all 0.3s ease-in-out;
-		      -moz-transition: all 0.3s ease-in-out;
-		      -o-transition: all 0.3s ease-in-out;
-		      transition: all 0.3s ease-in-out; }
-		  .tabs .tab-2 {
-		    width: 30%; }
-		    .tabs .tab-2 [type="radio"] + div {
-		      width: 200%;
-		      margin-left: 200%; }
-		    .tabs .tab-2 [type="radio"]:checked + div {
-		      margin-left: 0; }
-		    .tabs .tab-2:last-child [type="radio"] + div {
-		      margin-left: 100%; }
-		    .tabs .tab-2:last-child [type="radio"]:checked + div {
-		      margin-left: -100%; }
-    </style>
-     
-    <footer>
-    	<style>
-	        color{
-	            background-image: linear-gradient(135deg, deeppink, dodgerblue);
-	            font-size: 20px;
-	            font-weight: bold;
-	            -webkit-background-clip: text;
-	            -moz-background-clip: text;
-	            background-clip: text;
-	            box-decoration-break: clone;
-	            -webkit-box-decoration-break: clone;
-	            -moz-box-decoration-break: clone;
-	            color: transparent;
-	        }
-		</style>
-	 	<color>新春快乐 大吉大利 <br>勤洗手 戴口罩<br>没事别瞎跑 狗命要紧</color>
-	</footer>
-	
 </body>
 </html>
