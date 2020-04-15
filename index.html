@@ -666,7 +666,7 @@
                             <a target="_blank" href="http://www.uigreat.com/">
                                 <div class="item">
                                     <div class="logo">
-                                        <img src="img/uigreat-favicon.jpg"> UIGREAT
+                                        <img src="http://www.uigreat.com/favicon.ico"> UIGREAT
                                     </div>
                                     <div class="desc">
                                         优秀设计师的贴心伴侣。
@@ -676,7 +676,7 @@
                             <a target="_blank" href="http://huaban.com/">
                                 <div class="item">
                                     <div class="logo">
-                                        <img src="img/huaban-favicon.png"> 花瓣
+                                        <img src="http://huaban.com/favicon.ico"> 花瓣
                                     </div>
                                     <div class="desc">
                                         花瓣，陪你做生活的设计师。
@@ -686,7 +686,7 @@
                             <a target="_blank" href="https://dribbble.com/">
                                 <div class="item">
                                     <div class="logo">
-                                        <img src="img/dribbble-favicon.png"> Dribbble
+                                        <img src="https://cdn.dribbble.com/assets/dribbble-ball-192-ec064e49e6f63d9a5fa911518781bee0c90688d052a038f8876ef0824f65eaf2.png"> Dribbble
                                     </div>
                                     <div class="desc">
                                         设计作品的交流平台
@@ -696,7 +696,7 @@
                             <a target="_blank" href="https://www.behance.net/">
                                 <div class="item">
                                     <div class="logo">
-                                        <img src="img/behance-favicon.png"> Behance
+                                        <img src="https://www.behance.net/favicon.ico"> Behance
                                     </div>
                                     <div class="desc">
                                         系列设计作品开放平台
@@ -706,7 +706,7 @@
                             <a target="_blank" href="https://www.pinterest.com/">
                                 <div class="item">
                                     <div class="logo">
-                                        <img src="img/pinterest-favicon.png"> Pinterest
+                                        <img src=""> Pinterest
                                     </div>
                                     <div class="desc">
                                         图片分享类的社交网站
@@ -716,7 +716,7 @@
                             <a target="_blank" href="http://www.zcool.com.cn/">
                                 <div class="item">
                                     <div class="logo">
-                                        <img src="img/zcool-favicon.jpg"> 站酷
+                                        <img src="http://www.zcool.com.cn/favicon.ico"> 站酷
                                     </div>
                                     <div class="desc">
                                         打开站酷,发现更好的设计!
@@ -726,7 +726,7 @@
                             <a target="_blank" href="https://thefwa.com/">
                                 <div class="item">
                                     <div class="logo">
-                                        <img src="img/thefwa-favicon.png"> FWA
+                                        <img src="https://thefwa.com/favicon.ico"> FWA
                                     </div>
                                     <div class="desc">
                                         互动多媒体网站收录平台
@@ -821,7 +821,7 @@
                             <a target="_blank" href="http://www.mycodes.net/">
                                 <div class="item">
                                     <div class="logo">
-                                        <img src="img/ymzj-favicon.png"> 源码之家
+                                        <img src="http://www.mycodes.net/favicon.ico"> 源码之家
                                     </div>
                                     <div class="desc">
                                         优秀源码集结地。
@@ -1192,15 +1192,37 @@
                             <div>
                                 Copyright © 2018- 2050
                                 <a href="http://tangming.github.io">第一站导航 TangMing</a>
-                                <audio autoplay="autoplay">
+                                <!--<audio autoplay="autoplay">
 
-                                    <source src="http://sz.sycdn.kuwo.cn/58e4ebf93c3a198288e2e5e42790543d/5e96cda0/resource/n2/39/81/3430051340.mp3" type="audio/mpeg" />
-                                    <source src="http://cms.hovertree.com/hovertreesound/hovertreexihuanni.mp3" type="audio/mpeg" />
-                                    您的浏览器不支持播放音乐。请用支持html5的浏览器打开,例如chrome或火狐或者新版IE等。
-                                    <br />
-                                </audio>
+        <source src="http://sz.sycdn.kuwo.cn/58e4ebf93c3a198288e2e5e42790543d/5e96cda0/resource/n2/39/81/3430051340.mp3" type="audio/mpeg" />
+        <source src="http://cms.hovertree.com/hovertreesound/hovertreexihuanni.mp3" type="audio/mpeg" />
+        您的浏览器不支持播放音乐。请用支持html5的浏览器打开,例如chrome或火狐或者新版IE等。
+        <br />
+    </audio>-->
+
+                                <div id="audioBox">
+                                    <script type="text/javascript">
+                                        window.onload = function () {
+                                            var arr = ["http://cms.hovertree.com/hovertreesound/hovertreexihuanni.mp3","http://sz.sycdn.kuwo.cn/58e4ebf93c3a198288e2e5e42790543d/5e96cda0/resource/n2/39/81/3430051340.mp3"];               //把需要播放的歌曲从后往前排，这里已添加两首音乐，可继续添加多个音乐
+                                            var myAudio = new Audio();
+                                            myAudio.preload = true;
+                                            myAudio.controls = true;
+                                            myAudio.src = arr.pop();         //每次读数组最后一个元素
+                                            myAudio.addEventListener('ended', playEndedHandler, false);
+                                            myAudio.play();
+                                            document.getElementById("audioBox").appendChild(myAudio);
+                                            myAudio.loop = false;//禁止循环，否则无法触发ended事件
+                                            function playEndedHandler() {
+                                                myAudio.src = arr.pop();
+                                                myAudio.play();
+                                                console.log(arr.length);
+                                                !arr.length && myAudio.removeEventListener('ended', playEndedHandler, false);//只有一个元素时解除绑定
+                                            }
+                                        }
+                                    </script>
+
+                                </div>
                             </div>
-                        </div>
                     </footer>
                     <div id="fixedBar">
                         <svg class="Zi Zi--BackToTop" title="回到顶部" fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M16.036 19.59a1 1 0 0 1-.997.995H9.032a.996.996 0 0 1-.997-.996v-7.005H5.03c-1.1 0-1.36-.633-.578-1.416L11.33 4.29a1.003 1.003 0 0 1 1.412 0l6.878 6.88c.782.78.523 1.415-.58 1.415h-3.004v7.005z"></path></svg>
