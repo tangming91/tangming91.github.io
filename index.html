@@ -1038,6 +1038,11 @@
                                             //delete this.userlist[i];--无刷新
 
                                         }
+                                    },
+                                    computed: {
+                                        getOuser() {
+                                            return this.userlist.filter(c => c.id > 3);
+                                        }
                                     }
 
                                 });
