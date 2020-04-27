@@ -1097,6 +1097,26 @@
                                             <input type="text" name="" id="" v-model="id" />
                                             <input type="text" name="" id="" value="" v-model="username" />
                                             <input type="button" name="" id="" :value="addval" @click="addtableuser" />
+                                            <div>
+                                                安装nodejs<br />
+                                                配置环境变量<br />
+                                                <br />
+                                                npm config set prefix "D:\nodejs\node_global"<br />
+                                                npm config set cache "D:\nodejs\node_cache"<br />
+                                                <br />
+                                                安装cnpm<br />
+                                                npm install -g cnpm --registry=http://registry.npm.taobao.org<br />
+                                                安装vue cli<br />
+                                                cnpm install -g @vue/cli<br />
+                                                <br />
+                                                创建项目<br />
+                                                vue create xxxx<br />
+                                                <br />
+                                                cnpm run serve<br />
+                                                <br />
+                                                axios 请求<br />
+                                                qs post请求参数处理<br />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1213,11 +1233,7 @@
                                             return this.userlist.filter(c => c.id > 3);
                                         }
                                     }
-
                                 });
-
-
-
                             </script>
                             <style type="text/css">
                                 table {
