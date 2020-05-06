@@ -1033,9 +1033,12 @@
                                         <p>{{score}}</p>
                                         <p>{{level}}</p>
                                         <input type="button" name="" id="" value="开始抽奖" @click="start" />
-                                        <input type="button" name="" id="" value="停止抽奖" @click="stop" />
-
+                                        <input type="button" name="" id="" value="停止抽奖" @click="stop" />                                        
+                                        <span></span><br>
+                                        <span @click="putnum" class="numspan">-</span><input type="text" class="numIn" value="1" @change="changeNum($event)" :value="num"><span class="numspan" @click="addnum">+</span>
                                     </div>
+                                    
+                                       
                                 </div>
 
                                 <div class="tab-2">
@@ -1148,7 +1151,8 @@
                                     data: {
                                         score: 0,
                                         level: null,
-                                        intervalIndex: null
+                                        intervalIndex: null,
+                                        num:1
                                     },
                                     methods: {
                                         start() {
@@ -1177,10 +1181,36 @@
                                         stop() {
                                             clearInterval(this.intervalIndex);
                                             this.intervalIndex = null;
+                                        },
+                                        addnum(){
+                                            this.num++;
+                                        },
+                                        putnum(){
+                                            if(this.num>1){
+                                                this.num--;
+                                            }                                            
+                                        },
+                                        changeNum(e){
+                                            var currnum=e.currentTarget.value;
+                                            if(!isNaN(currnum)&currnum>=1){
+                                                this.num=currnum;
+                                            }else{
+                                                e.currentTarget.value=this.num;
+                                            }
                                         }
                                     }
 
                                 });
+
+                                // var vm21=new Vue({
+                                //     data:{
+                                //         num:1
+                                //     },
+                                //     methods:{
+                                        
+                                //     }
+
+                                // }).$mount("#app2_1");
 
                                 var vm3 = new Vue({
                                     el: "#app3",
@@ -1247,6 +1277,16 @@
 
                                 .oddstyle {
                                     background-color: rgb(255,168,168);
+                                }
+                                .numIn{
+                                    width: 40px;
+                                }
+                                .numspan{
+                                    padding: 0px 10px;
+                                    
+                                }
+                                .numspan:hover{
+                                    cursor:pointer;
                                 }
                             </style>
                             <style>
